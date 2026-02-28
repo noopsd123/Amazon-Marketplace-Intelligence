@@ -1,0 +1,34 @@
+name: dbt Build & Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  dbt-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Write GCP key file
+        run: echo '${{ secrets.GCP_KEY_JSON }}' > gcp_key.json
+
+      - name: dbt build
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: gcp_key.json
+          GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+        run: |
+          cd transform/ecommerce_dbt
+          dbt build --profiles-dir .

@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: fct_weekly_snapshots
+    description: "One row per product per week with pricing, rating, and WoW change metrics"
+    columns:
+      - name: snapshot_id
+        tests:
+          - unique
+          - not_null
+      - name: product_id
+        tests:
+          - not_null
+      - name: snapshot_date
+        tests:
+          - not_null
+
+  - name: dim_products
+    description: "One row per unique product with latest known attributes"
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null

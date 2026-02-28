@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: raw
+    database: ecommerce-price-analytics
+    schema: raw
+    tables:
+      - name: product_snapshots
+        description: "Raw weekly product snapshots loaded from octaprice dataset"

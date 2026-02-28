@@ -1,0 +1,18 @@
+# Data files - too large for GitHub
+data/raw/
+data/sample/
+
+# dbt generated files
+transform/ecommerce_dbt/target/
+transform/ecommerce_dbt/dbt_packages/
+transform/ecommerce_dbt/logs/
+transform/logs/
+logs/
+
+# Environment files
+.env
+.env.txt
+gcp_key.json
+venv/
+__pycache__/
+*.pyc
