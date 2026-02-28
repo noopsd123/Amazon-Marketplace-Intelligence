@@ -23,11 +23,11 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Write GCP key file
-        run: echo '${{ secrets.GCP_KEY_JSON }}' > gcp_key.json
+        run: echo '${{ secrets.GCP_KEY_JSON }}' > $GITHUB_WORKSPACE/gcp_key.json
 
       - name: dbt build
         env:
-          GOOGLE_APPLICATION_CREDENTIALS: gcp_key.json
+          GOOGLE_APPLICATION_CREDENTIALS: ${{ github.workspace }}/gcp_key.json
           GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
         run: |
           cd transform/ecommerce_dbt
