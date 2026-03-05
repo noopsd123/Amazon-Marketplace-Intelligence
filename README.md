@@ -14,7 +14,7 @@ The project answers real business questions: *Which categories have supply gaps?
 **Stack:** Python · Google BigQuery · dbt · SQL · Power BI · Prefect · GitHub Actions
 
 ---
-## 📦 Dataset Overview
+## 📦 Dataset
 
 **Source:** [Octaprice Ecommerce Product Dataset]([https://www.kaggle.com/](https://github.com/octaprice/ecommerce-product-dataset/tree/main)) — a real-world Amazon 
 product catalog snapshot capturing pricing, ratings, reviews, and availability across hundreds of categories.
