@@ -98,11 +98,11 @@ amazon-price-analytics/
 │                                                             │
 │  🔄 Transform                    📊 Visualize              │
 │  dbt Models          ───────▶   Power BI Desktop            |
-│  staging/                        4-page Dashboard           │
+│  staging/                        3-page Dashboard           │
 │  └─ stg_product_snapshots        Page 1: Market Health      │
 │  marts/                          Page 2: Competitive        │
 │  ├─ fct_weekly_snapshots         Page 3: Launch Readiness   │
-│  ├─ dim_products                 Page 4: Sales Performance  │
+│  ├─ dim_products                                            │
 │  └─ dim_categories                                          │
 │                                                             │
 │  🔁 Orchestration               ✅ Quality Gates           │
