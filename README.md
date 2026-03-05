@@ -10,15 +10,13 @@
 Amazon Marketplace Intelligence is an end-to-end data pipeline and dashboard system that ingests raw Amazon product data, transforms it into analytical models, and surfaces competitive and operational insights through a 4-page Power BI dashboard.
 
 The project answers real business questions: *Which categories have supply gaps? Where are the best-value products? How do prices shift week over week?* It is designed for product managers, brand analysts, and marketplace sellers who need data-driven answers — not guesswork.
-
-**Data Source:** [Octaprice Ecommerce Product Dataset]([https://www.kaggle.com/](https://github.com/octaprice/ecommerce-product-dataset/tree/main))  
-**Made by:** Noopur Divekar · [LinkedIn](https://www.linkedin.com/in/noopurd)  
-**Stack:** Python · Google BigQuery · dbt · Power BI · Prefect · GitHub Actions
+ 
+**Stack:** Python · Google BigQuery · dbt · SQL · Power BI · Prefect · GitHub Actions
 
 ---
 ## 📦 Dataset Overview
 
-**Source:** [Octaprice Ecommerce Product Dataset](https://www.kaggle.com/) — a real-world Amazon 
+**Source:** [Octaprice Ecommerce Product Dataset]([https://www.kaggle.com/](https://github.com/octaprice/ecommerce-product-dataset/tree/main)) — a real-world Amazon 
 product catalog snapshot capturing pricing, ratings, reviews, and availability across hundreds of categories.
 
 | Attribute | Detail |
