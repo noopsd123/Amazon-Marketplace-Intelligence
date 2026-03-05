@@ -7,9 +7,13 @@
 
 ## 📌 Overview
 
-Amazon Marketplace Intelligence is an end-to-end data pipeline and dashboard system that ingests raw Amazon product data, transforms it into analytical models, and surfaces competitive and operational insights through a 4-page Power BI dashboard.
+Amazon sellers and product analysts face three problems every day: they don't know where prices are heading, which categories have unmet demand, and which products are actually worth competing against. Spreadsheets can't answer these questions at scale across 26,000 products.
 
 The project answers real business questions: *Which categories have supply gaps? Where are the best-value products? How do prices shift week over week?* It is designed for product managers, brand analysts, and marketplace sellers who need data-driven answers — not guesswork.
+This project builds the infrastructure and analytics layer that makes those answers instant.
+
+A fully automated ELT pipeline extracts Amazon product data, loads it into BigQuery, and transforms it through dbt into clean, tested analytical models. A 4-page Power BI dashboard sits on top — built for four different audiences: executives tracking market health, analysts studying competitive positioning, product teams identifying launch opportunities, and sales teams monitoring price movements.
+
  
 **Stack:** Python · Google BigQuery · dbt · SQL · Power BI · Prefect · GitHub Actions
 
