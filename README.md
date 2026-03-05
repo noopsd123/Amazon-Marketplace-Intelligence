@@ -88,16 +88,16 @@ amazon-price-analytics/
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    DATA PIPELINE FLOW                        │
+│                    DATA PIPELINE FLOW                       │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
-│  📦 Source Data          🐍 Extract & Load                  │
-│  Octaprice Dataset  ───▶  Python Scripts  ───▶  BigQuery    │
-│  (CSV files)              extract.py              raw_data   │
-│                           load.py                 dataset    │
+│  📦 Source Data          🐍 Extract & Load                 │
+│  Octaprice Dataset  ───▶  Python Scripts  ───▶  BigQuery   │
+│  (CSV files)              extract.py              raw_data  │
+│                           load.py                 dataset   │
 │                                                             │
-│  🔄 Transform                    📊 Visualize               │
-│  dbt Models          ───────▶   Power BI Desktop            │
+│  🔄 Transform                    📊 Visualize              │
+│  dbt Models          ───────▶   Power BI Desktop            |
 │  staging/                        4-page Dashboard           │
 │  └─ stg_product_snapshots        Page 1: Market Health      │
 │  marts/                          Page 2: Competitive        │
@@ -105,7 +105,7 @@ amazon-price-analytics/
 │  ├─ dim_products                 Page 4: Sales Performance  │
 │  └─ dim_categories                                          │
 │                                                             │
-│  🔁 Orchestration               ✅ Quality Gates            │
+│  🔁 Orchestration               ✅ Quality Gates           │
 │  Prefect (prefect.yaml)          dbt tests (schema.yml)     │
 │  Scheduled weekly runs           not_null, accepted_range   │
 │                                                             │
