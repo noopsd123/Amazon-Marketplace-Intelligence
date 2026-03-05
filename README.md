@@ -1,4 +1,4 @@
-# 🛒 Amazon Marketplace Intelligence
+# Amazon Marketplace Intelligence
 > A full-stack data engineering and business intelligence project that tracks, transforms, and visualizes Amazon product pricing, quality, and market dynamics — built on BigQuery, dbt, and Power BI.
 
 ![Pipeline](https://img.shields.io/badge/Pipeline-Prefect-blue) ![Transform](https://img.shields.io/badge/Transform-dbt-orange) ![Warehouse](https://img.shields.io/badge/Warehouse-BigQuery-yellow) ![BI](https://img.shields.io/badge/BI-PowerBI-gold) ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
