@@ -11,8 +11,8 @@ Amazon Marketplace Intelligence is an end-to-end data pipeline and dashboard sys
 
 The project answers real business questions: *Which categories have supply gaps? Where are the best-value products? How do prices shift week over week?* It is designed for product managers, brand analysts, and marketplace sellers who need data-driven answers — not guesswork.
 
-**Data Source:** [Octaprice Ecommerce Product Dataset](https://www.kaggle.com/)  
-**Dashboard by:** Noopur Divekar · [LinkedIn](https://www.linkedin.com/in/noopurdivekar)  
+**Data Source:** [Octaprice Ecommerce Product Dataset]([https://www.kaggle.com/](https://github.com/octaprice/ecommerce-product-dataset/tree/main))  
+**Dashboard by:** Noopur Divekar · [LinkedIn](https://www.linkedin.com/in/noopurd)  
 **Stack:** Python · Google BigQuery · dbt · Power BI · Prefect · GitHub Actions
 
 ---
@@ -26,66 +26,6 @@ The project answers real business questions: *Which categories have supply gaps?
 - **Value Score Algorithm** — Composite metric combining rating and discount depth to surface best-value products
 - **Supply Gap Detection** — Flags categories where in-stock rate falls below 85% threshold
 - **Data Quality Guards** — dbt tests enforce non-null constraints and accepted ranges on all key metrics
-
----
-
-### Dashboard Pages — Stakeholders & Use Cases
-
-#### Page 1 — Market Health
-**Stakeholders:** Executive leadership, category managers, market analysts
-
-| Business Question | Visual |
-|---|---|
-| How many products are we tracking and what is the avg quality? | KPI cards — total products, avg rating, avg price |
-| Which categories dominate the market? | Category distribution chart |
-| What is the overall discount landscape? | Avg discount by category |
-| How do ratings distribute across the catalog? | Rating distribution histogram |
-
-**Example scenario:** A category manager asks, *"Are our Electronics ratings above market average?"* → Filter to Electronics on Page 1 → compare Avg Rating card against the benchmark line.
-
----
-
-#### Page 2 — Competitive Analysis
-**Stakeholders:** Brand strategists, pricing teams, product marketers
-
-| Business Question | Visual |
-|---|---|
-| Which products offer the best price-to-quality ratio? | Price vs Quality scatter (quadrant chart) |
-| Which categories discount most aggressively? | Avg Discount Depth by Category bar |
-| Which brands own the most review volume (search authority)? | Market Share by Review Volume |
-| How does pricing architecture vary by category? | Price Architecture stacked bar |
-| Which products have the highest composite value score? | Highest Value Products table |
-
-**Example scenario:** A pricing strategist asks, *"Where are competitors discounting most to win market share?"* → Page 2 → Avg Discount Depth chart → filter to your category → benchmark your discount against the category average.
-
----
-
-#### Page 3 — Product Analytics & Launch Readiness
-**Stakeholders:** Product launch teams, marketplace sellers, e-commerce entrepreneurs
-
-| Business Question | Visual |
-|---|---|
-| How many products meet all launch-readiness criteria? | Launch Ready Count & Rate KPI cards |
-| Which categories have the most proven launch opportunities? | Launch-Ready Products by Category |
-| Where are supply gaps that signal unmet demand? | Supply Availability Gaps (in-stock rate) |
-| How crowded is each category? Where are niches? | Category Crowding donut chart |
-| What does the competitive price landscape look like? | Price Range by Category table |
-| Which specific products should I study or compete against? | Launch Candidates table |
-
-**Launch criteria:** Rating ≥ 4.0 · In Stock = True · Reviews ≥ 500
-
-**Example scenario:** A seller asks, *"I want to launch in a category with demand but low competition."* → Page 3 → filter Supply Availability below 85% → cross-reference with Category Crowding donut for small-tile categories → those are your target markets.
-
----
-
-#### Page 4 — Sales Performance
-**Stakeholders:** Sales operations, finance, revenue analysts
-
-| Business Question | Visual |
-|---|---|
-| How have prices shifted week over week? | Price change WoW trend |
-| Which products have the highest price volatility? | Price range 4-week rolling window |
-| Where are new reviews being generated fastest? | Review velocity by category |
 
 ---
 
@@ -129,43 +69,21 @@ amazon-price-analytics/
 ```
 
 ---
+## 📦 Dataset Overview
 
-## 🗂️ Data Dictionary
+**Source:** [Octaprice Ecommerce Product Dataset](https://www.kaggle.com/) — a real-world Amazon 
+product catalog snapshot capturing pricing, ratings, reviews, and availability across hundreds of categories.
 
-### `fct_weekly_snapshots` — Core Fact Table
+| Attribute | Detail |
+|---|---|
+| **Total Records** | ~26,000 product snapshots |
+| **Categories** | 20+ top-level Amazon categories |
+| **Price Range** | $0.19 — $2,399.99 USD |
+| **Rating Range** | 0.0 — 5.0 stars |
+| **Key Fields** | Product ID, Sale Price, Listed Price, Rating, Review Count, In-Stock Status, Category, Brand |
+| **Granularity** | One row per product per snapshot date |
+| **Format** | CSV → loaded into Google BigQuery |
 
-| Column | Type | Description | Example |
-|---|---|---|---|
-| `snapshot_id` | STRING | Unique ID per product-date combination (MD5 hash) | `db17d63a...` |
-| `product_id` | STRING | Amazon ASIN — unique product identifier | `B00E9UNNB0` |
-| `product_name` | STRING | Full product title as listed on Amazon | `Sengoku Indoor Kerosene Heater` |
-| `brand_name` | STRING | Brand as listed (prefixed with "Brand:") | `Brand: KeroHeat` |
-| `category` | STRING | Top-level Amazon product category | `Home & Kitchen` |
-| `snapshot_date` | DATE | Date the product data was captured | `2024-01-15` |
-| `sale_price` | FLOAT | Current selling price in USD | `29.99` |
-| `listed_price` | FLOAT | Original listed/reference price in USD | `49.99` |
-| `currency` | STRING | Currency code | `USD` |
-| `rating` | FLOAT | Average customer rating (0–5 scale) | `4.3` |
-| `review_count` | INTEGER | Total number of customer reviews | `1247` |
-| `in_stock` | BOOLEAN | Whether product is currently available | `TRUE` |
-| `source_file` | STRING | Origin file name for data lineage | `amazon_products_jan2024.csv` |
-| `discount_amount` | FLOAT | Absolute price reduction in USD | `20.00` |
-| `discount_pct` | FLOAT | Discount as decimal (0–1 range). `0.40` = 40% off | `0.40` |
-| `price_change_wow` | FLOAT | Sale price change vs prior week in USD | `-2.50` |
-| `price_change_pct_wow` | FLOAT | Percentage price change vs prior week | `-7.69` |
-| `rating_change_wow` | FLOAT | Rating change vs prior week | `0.10` |
-| `new_reviews_wow` | INTEGER | New reviews added since prior week | `43` |
-| `price_range_4wk` | FLOAT | Difference between max and min price over 4 weeks | `5.00` |
-
-**Missing data symbols:** `NULL` indicates no data available for that field/period. Rows with `NULL` prices are excluded from aggregation measures via DAX filters.
-
-**Key acronyms:**
-- `WoW` — Week over Week
-- `4wk` — 4-week rolling window
-- `ASIN` — Amazon Standard Identification Number
-- `pct` — percentage
-
----
 
 ## ⚙️ Pipeline Architecture
 
@@ -240,22 +158,65 @@ ecommerce_dbt:
 
 ---
 
-## 📋 Changelog
+### Dashboard Pages — Stakeholders & Use Cases
 
-### v1.2.0 — March 2026
-- Fixed `discount_pct` calculation — replaced `* 100` multiplication with `SAFE_DIVIDE` and `GREATEST/LEAST` guards to handle swapped price columns
-- Added `WHERE sale_price > 0 AND listed_price > 0` filter to remove zero-price outliers
-- Added dbt schema tests for `discount_pct` accepted range (0–1)
+#### Page 1 — Market Health
+**Stakeholders:** Executive leadership, category managers, market analysts
 
-### v1.1.0 — February 2026
-- Added `price_range_4wk` rolling volatility metric to `fct_weekly_snapshots`
-- Added `new_reviews_wow` and `rating_change_wow` week-over-week columns
-- Built Page 3 (Product Analytics & Launch Readiness) with supply gap detection
+| Business Question | Visual |
+|---|---|
+| How many products are we tracking and what is the avg quality? | KPI cards — total products, avg rating, avg price |
+| Which categories dominate the market? | Category distribution chart |
+| What is the overall discount landscape? | Avg discount by category |
+| How do ratings distribute across the catalog? | Rating distribution histogram |
 
-### v1.0.0 — February 2026
-- Initial pipeline setup: extract → BigQuery → dbt → Power BI
-- Built Page 1 (Market Health) and Page 2 (Competitive Analysis)
-- Deployed Prefect orchestration for weekly scheduled runs
+**Example scenario:** A category manager asks, *"Are our Electronics ratings above market average?"* → Filter to Electronics on Page 1 → compare Avg Rating card against the benchmark line.
+
+---
+
+#### Page 2 — Competitive Analysis
+**Stakeholders:** Brand strategists, pricing teams, product marketers
+
+| Business Question | Visual |
+|---|---|
+| Which products offer the best price-to-quality ratio? | Price vs Quality scatter (quadrant chart) |
+| Which categories discount most aggressively? | Avg Discount Depth by Category bar |
+| Which brands own the most review volume (search authority)? | Market Share by Review Volume |
+| How does pricing architecture vary by category? | Price Architecture stacked bar |
+| Which products have the highest composite value score? | Highest Value Products table |
+
+**Example scenario:** A pricing strategist asks, *"Where are competitors discounting most to win market share?"* → Page 2 → Avg Discount Depth chart → filter to your category → benchmark your discount against the category average.
+
+---
+
+#### Page 3 — Product Analytics & Launch Readiness
+**Stakeholders:** Product launch teams, marketplace sellers, e-commerce entrepreneurs
+
+| Business Question | Visual |
+|---|---|
+| How many products meet all launch-readiness criteria? | Launch Ready Count & Rate KPI cards |
+| Which categories have the most proven launch opportunities? | Launch-Ready Products by Category |
+| Where are supply gaps that signal unmet demand? | Supply Availability Gaps (in-stock rate) |
+| How crowded is each category? Where are niches? | Category Crowding donut chart |
+| What does the competitive price landscape look like? | Price Range by Category table |
+| Which specific products should I study or compete against? | Launch Candidates table |
+
+**Launch criteria:** Rating ≥ 4.0 · In Stock = True · Reviews ≥ 500
+
+**Example scenario:** A seller asks, *"I want to launch in a category with demand but low competition."* → Page 3 → filter Supply Availability below 85% → cross-reference with Category Crowding donut for small-tile categories → those are your target markets.
+
+---
+
+#### Page 4 — Sales Performance
+**Stakeholders:** Sales operations, finance, revenue analysts
+
+| Business Question | Visual |
+|---|---|
+| How have prices shifted week over week? | Price change WoW trend |
+| Which products have the highest price volatility? | Price range 4-week rolling window |
+| Where are new reviews being generated fastest? | Review velocity by category |
+
+---
 
 ---
 
