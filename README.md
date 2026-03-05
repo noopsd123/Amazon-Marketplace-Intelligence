@@ -12,10 +12,26 @@ Amazon Marketplace Intelligence is an end-to-end data pipeline and dashboard sys
 The project answers real business questions: *Which categories have supply gaps? Where are the best-value products? How do prices shift week over week?* It is designed for product managers, brand analysts, and marketplace sellers who need data-driven answers — not guesswork.
 
 **Data Source:** [Octaprice Ecommerce Product Dataset]([https://www.kaggle.com/](https://github.com/octaprice/ecommerce-product-dataset/tree/main))  
-**Dashboard by:** Noopur Divekar · [LinkedIn](https://www.linkedin.com/in/noopurd)  
+**Made by:** Noopur Divekar · [LinkedIn](https://www.linkedin.com/in/noopurd)  
 **Stack:** Python · Google BigQuery · dbt · Power BI · Prefect · GitHub Actions
 
 ---
+## 📦 Dataset Overview
+
+**Source:** [Octaprice Ecommerce Product Dataset](https://www.kaggle.com/) — a real-world Amazon 
+product catalog snapshot capturing pricing, ratings, reviews, and availability across hundreds of categories.
+
+| Attribute | Detail |
+|---|---|
+| **Total Records** | ~26,000 product snapshots |
+| **Categories** | 20+ top-level Amazon categories |
+| **Price Range** | $0.19 — $2,399.99 USD |
+| **Rating Range** | 0.0 — 5.0 stars |
+| **Key Fields** | Product ID, Sale Price, Listed Price, Rating, Review Count, In-Stock Status, Category, Brand |
+| **Granularity** | One row per product per snapshot date |
+| **Format** | CSV → loaded into Google BigQuery |
+
+
 
 ## ✨ Key Features
 
@@ -69,21 +85,6 @@ amazon-price-analytics/
 ```
 
 ---
-## 📦 Dataset Overview
-
-**Source:** [Octaprice Ecommerce Product Dataset](https://www.kaggle.com/) — a real-world Amazon 
-product catalog snapshot capturing pricing, ratings, reviews, and availability across hundreds of categories.
-
-| Attribute | Detail |
-|---|---|
-| **Total Records** | ~26,000 product snapshots |
-| **Categories** | 20+ top-level Amazon categories |
-| **Price Range** | $0.19 — $2,399.99 USD |
-| **Rating Range** | 0.0 — 5.0 stars |
-| **Key Fields** | Product ID, Sale Price, Listed Price, Rating, Review Count, In-Stock Status, Category, Brand |
-| **Granularity** | One row per product per snapshot date |
-| **Format** | CSV → loaded into Google BigQuery |
-
 
 ## ⚙️ Pipeline Architecture
 
