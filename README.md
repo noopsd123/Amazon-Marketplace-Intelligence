@@ -114,9 +114,9 @@ amazon-price-analytics/
 │  Scheduled weekly runs           not_null, accepted_range   │
 │                                                             │
 └─────────────────────────────────────────────────────────────┘
-<img width="2512" height="1664" alt="Gemini_Generated_Image_a5qcu2a5qcu2a5qc" src="https://github.com/user-attachments/assets/00385314-a33b-4c3b-9721-410d7bd3e3c4" />
 
 ```
+<img width="2512" height="1664" alt="Gemini_Generated_Image_a5qcu2a5qcu2a5qc" src="https://github.com/user-attachments/assets/00385314-a33b-4c3b-9721-410d7bd3e3c4" />
 
 ### Pipeline Stages
 
